@@ -1,0 +1,38 @@
+CREATE TABLE casas (
+    id_casa INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    telefone VARCHAR(50) NOT NULL,
+    vagas INT DEFAULT 0,
+    descricao TEXT,
+    imagem VARCHAR(255) DEFAULT 'default.jpg', -- caminho da imagem na pasta static/images
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE solicitacoes (
+    id_solicitacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_casa INT NOT NULL,
+    nome_idoso VARCHAR(255) NOT NULL,
+    telefone VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    motivo TEXT NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_casa) REFERENCES casas(id_casa) ON DELETE CASCADE
+);
+
+
+Inserindo casas 
+
+INSERT INTO casas (nome, endereco, telefone, vagas, descricao)
+VALUES 
+('Lar Esperança', 'Rua Central, 45, São Paulo', '(11) 98888-1234', 12, 'Equipe especializada em cuidados de longa duração.'),
+('Recanto Feliz', 'Av. Brasil, 200, Rio de Janeiro', '(21) 97777-5678', 8, 'Ambiente acolhedor, com atividades recreativas diárias.');
+
+Inserindo solicitacoes
+
+INSERT INTO solicitacoes (id_casa, nome_idoso, telefone, email, motivo)
+VALUES
+(1, 'João da Silva', '(11) 91234-5678', 'familia.joao@email.com', 'Procuro vaga para cuidados pós-operatórios.'),
+(2, 'Maria Oliveira', '(21) 98765-4321', 'maria.familia@email.com', 'Necessidade de cuidados integrais com acompanhamento médico.'),
+(1, 'Carlos Pereira', '(11) 95555-1111', 'carlos.filho@email.com', 'Interesse em vaga temporária para reabilitação.');

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel - Cuida+</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Nunito', sans-serif;
+    }
+    .navbar {
+      background: linear-gradient(135deg, #9370DB, #6A5ACD);
+    }
+    .navbar-brand, .nav-link, .btn-logout {
+      color: white !important;
+      font-weight: 600;
+    }
+    .card-solicitacao {
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .card-solicitacao h5 {
+      color: #6A5ACD;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <span class="navbar-brand">Painel - {{ session.casa_nome }}</span>
+      <a class="btn btn-light btn-logout" href="/logout">Sair</a>
+    </div>
+  </nav>
+
+  <div class="container py-5">
+    <h3 class="mb-4">Solicitações Recebidas</h3>
+
+    {% if solicitacoes %}
+      <div class="row">
+        {% for solic in solicitacoes %}
+          <div class="col-md-6 mb-4">
+            <div class="card card-solicitacao">
+              <div class="card-body">
+                <h5>{{ solic[2] }}</h5>
+                <p><strong>Telefone:</strong> {{ solic[3] }}</p>
+                <p><strong>Email:</strong> {{ solic[4] }}</p>
+                <p><strong>Motivo:</strong> {{ solic[5] }}</p>
+                <p><strong>Plano:</strong> {{ solic[6] }}</p>
+                <small class="text-muted">Enviado em: {{ solic[7] }}</small>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-muted">Nenhuma solicitação recebida até agora.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
